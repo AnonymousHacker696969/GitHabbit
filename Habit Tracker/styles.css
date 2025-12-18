@@ -1,0 +1,392 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --container-bg: #f8f9fa;
+    --border-color: #dee2e6;
+    --primary-color: #4a6fa5;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --calendar-cell: #ebedf0;
+    --habit-1: #40c463;
+    --habit-2: #30a14e;
+    --habit-3: #216e39;
+    --habit-4: #9be9a8;
+    --habit-5: #d1f7c4;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a2e;
+    --text-color: #e6e6e6;
+    --container-bg: #16213e;
+    --border-color: #0f3460;
+    --primary-color: #4cc9f0;
+    --secondary-color: #a9a9a9;
+    --success-color: #4ade80;
+    --danger-color: #f87171;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --calendar-cell: #2d3748;
+    --habit-1: #26a641;
+    --habit-2: #0e8a16;
+    --habit-3: #006d32;
+    --habit-4: #39d353;
+    --habit-5: #9be9a8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: var(--container-bg);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    padding: 25px;
+    border: 1px solid var(--border-color);
+}
+
+header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h1 i {
+    font-size: 1.8rem;
+}
+
+.subtitle {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.theme-btn, .next-day-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.theme-btn:hover, .next-day-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.theme-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.next-day-btn {
+    background-color: var(--success-color);
+    color: white;
+}
+
+section {
+    margin-bottom: 35px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.current-date {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 600;
+}
+
+.streak-summary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.streak-count {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.calendar-container {
+    margin-top: 20px;
+}
+
+.calendar-months {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.month-column {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.month-name {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+    text-align: center;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-rows: repeat(7, 1fr);
+    gap: 3px;
+}
+
+.day-cell {
+    width: 15px;
+    height: 15px;
+    background-color: var(--calendar-cell);
+    border-radius: 2px;
+    position: relative;
+}
+
+.day-cell.today {
+    border: 2px solid var(--primary-color);
+}
+
+.calendar-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+.intensity-0 { background-color: var(--calendar-cell); }
+.intensity-1 { background-color: var(--habit-4); }
+.intensity-2 { background-color: var(--habit-1); }
+.intensity-3 { background-color: var(--habit-3); }
+
+.legend-label {
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+}
+
+.section-info {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.habits-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.habit-card {
+    display: flex;
+    align-items: center;
+    padding: 18px;
+    border-radius: 10px;
+    background-color: var(--container-bg);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.habit-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.habit-checkbox {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    cursor: pointer;
+    accent-color: var(--success-color);
+}
+
+.habit-info {
+    flex: 1;
+}
+
+.habit-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.habit-streak {
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.habit-streak i {
+    color: var(--danger-color);
+}
+
+.progress-container {
+    width: 200px;
+    margin-left: 20px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 2px solid var(--border-color);
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.current-day-info {
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .habit-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .progress-container {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .calendar-months {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .theme-btn, .next-day-btn {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .calendar-months {
+        gap: 10px;
+    }
+    
+    .day-cell {
+        width: 12px;
+        height: 12px;
+    }
+}
